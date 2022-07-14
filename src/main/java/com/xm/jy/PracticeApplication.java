@@ -9,6 +9,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.ApplicationContext;
 import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 import java.util.Date;
 
@@ -18,7 +19,7 @@ import java.util.Date;
  * @author albert.fang
  */
 @SpringBootApplication
-//@EnableScheduling
+@EnableScheduling
 @MapperScan(basePackages = "com.xm.jy.job_cx.dao")
 @EnableAsync
 public class PracticeApplication extends SpringBootServletInitializer {

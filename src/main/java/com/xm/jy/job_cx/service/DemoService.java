@@ -9,7 +9,7 @@ import org.springframework.stereotype.Controller;
  * @Author: 方翔鸣
  * @CreateDate: 2019/11/4 14:08
  */
-@Controller
+//@Controller
 public class DemoService {
 
     @Scheduled(cron = "0/3 * * * * ?")
