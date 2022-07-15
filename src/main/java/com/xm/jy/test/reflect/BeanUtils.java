@@ -5,6 +5,7 @@ import lombok.Data;
 
 import java.lang.annotation.*;
 import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -55,7 +56,8 @@ public class BeanUtils {
         for (Field tField : tClassDeclaredFields) {
             tField.setAccessible(true);
             Object o = map.get(tField.getName());
-            if (Objects.isNull(o)){
+            // 目标字段是final 或者 源类型没有这个属性值
+            if (Modifier.isFinal(tField.getModifiers()) || Objects.isNull(o)){
                 continue;
             }
             if (tField.isAnnotationPresent(Customized.class)){
