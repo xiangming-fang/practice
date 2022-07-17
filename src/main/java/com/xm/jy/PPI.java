@@ -2,6 +2,7 @@ package com.xm.jy;
 
 import org.junit.jupiter.api.Test;
 
+import javax.xml.transform.TransformerFactory;
 import java.util.HashMap;
 import java.util.List;
 
@@ -16,6 +17,13 @@ public class PPI {
     }
 
     private static double getPPI(){
+
+
+        TransformerFactory transformerFactory = TransformerFactory.newInstance();
+        transformerFactory.setAttribute("jdk.xml.xpathTotalOpLimit", "1000");
+
+
+
         double x = 1920;
         double y = 1080;
         double xPow = Math.pow(x, 2);

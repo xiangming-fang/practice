@@ -47,6 +47,7 @@ public class POI {
         HSSFWorkbook newWorkBook = new HSSFWorkbook();
         // 4、将第2步指定的sheet加入到这个工作簿里
         HSSFSheet newSheet = newWorkBook.createSheet("成绩表");
+        int lastRowNum = newSheet.getLastRowNum();
         List<HSSFCellStyle> sourceStyles = getSourceStyles(newWorkBook, sourceSheet);
         Integer colIndex = copySheet(sourceSheet, newSheet, sourceStyles, 0, true);
         System.out.println(colIndex);
