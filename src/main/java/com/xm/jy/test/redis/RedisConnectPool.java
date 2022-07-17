@@ -19,7 +19,7 @@ public class RedisConnectPool {
         // TODO 一些配置信息暂时忽略，没怎么搞明白
 
         // 把配置信息给jedisPool，并填写客户端redis的相关信息
-        pool = new JedisPool(config,"dev006-internal.softium.cn",6379,60000,null,18);
+        pool = new JedisPool(config,"47.100.251.239",6379,60000,"xm970829.",15);
     }
 
     // 从连接池中得到一个redis连接

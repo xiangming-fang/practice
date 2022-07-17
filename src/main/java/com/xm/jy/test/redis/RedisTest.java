@@ -18,7 +18,7 @@ public class RedisTest {
 
     public static final String DELAY_QUEUE = "delayQueue";
 
-    public static final String TIME = "2022-07-14 17:40";
+    public static final String TIME = "2022-07-17 17:09";
 
     public static void main(String[] args) throws InterruptedException, ParseException {
         product();
