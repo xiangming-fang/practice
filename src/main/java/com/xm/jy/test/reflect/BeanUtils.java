@@ -1,11 +1,12 @@
 package com.xm.jy.test.reflect;
 
-import com.xm.jy.test.util.JacksonUtil;
 import lombok.Data;
 
 import java.lang.annotation.*;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -38,14 +39,18 @@ public class BeanUtils {
 
     }
 
-    static <S,T> T getDTO(S s,T t) throws Exception {
+    public static <S,T> T getDTO(S s, T t){
         Class<?> sClass = s.getClass();
         Field[] declaredFields = sClass.getDeclaredFields();
-        HashMap<String, Object> map = new HashMap<>();
-        HashMap<String, Customized> customizedTypeMap = new HashMap<>();
+        HashMap<String, Object> map = new HashMap<>(16);
+        HashMap<String, Customized> customizedTypeMap = new HashMap<>(16);
         for (Field sField : declaredFields) {
             sField.setAccessible(true);
-            map.put(sField.getName(),sField.get(s));
+            try {
+                map.put(sField.getName(),sField.get(s));
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
             if (sField.isAnnotationPresent(Customized.class)){
                 Customized annotation = sField.getAnnotation(Customized.class);
                 customizedTypeMap.put(sField.getName(),annotation);
@@ -60,34 +65,43 @@ public class BeanUtils {
             if (Modifier.isFinal(tField.getModifiers()) || Objects.isNull(o)){
                 continue;
             }
-            if (tField.isAnnotationPresent(Customized.class)){
-                Customized customized = customizedTypeMap.get(tField.getName());
-                if (Objects.isNull(customized)){
-                    throw new RuntimeException(tField.getName() + "source 没有自定义类型属性");
-                }
-                if (customized.isList()){
+            if (Objects.nonNull(customizedTypeMap.get(tField.getName()))){
+                if (o instanceof List){
                     List<Object> customizedTypeListObj = new ArrayList<>();
+                    Type genericType = tField.getGenericType();
                     ((List)o).forEach( obj -> {
                         Object dto = null;
                         try {
-                            dto = getDTO(obj, customized.targetType().newInstance());
+                            dto = getDTO(obj, ((Class<?>)((ParameterizedType) genericType).getActualTypeArguments()[0]).getConstructor().newInstance());
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                         customizedTypeListObj.add(dto);
                     });
-                    tField.set(t,customizedTypeListObj);
+                    try {
+                        tField.set(t,customizedTypeListObj);
+                    } catch (IllegalAccessException e) {
+                        e.printStackTrace();
+                    }
                 }else {
                     Object dto = null;
                     try {
-                        dto = getDTO(o, customized.targetType().newInstance());
+                        dto = getDTO(o, tField.getType().getConstructor().newInstance());
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                    tField.set(t,dto);
+                    try {
+                        tField.set(t,dto);
+                    } catch (IllegalAccessException e) {
+                        e.printStackTrace();
+                    }
                 }
             }else {
-                tField.set(t,o);
+                try {
+                    tField.set(t,o);
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
             }
         }
         return t;
@@ -97,9 +111,9 @@ public class BeanUtils {
     static class Form{
         private int id;
         private String name;
-        @Customized(sourceType = SonForm.class,targetType = SonDto.class)
+        @Customized
         private SonForm son;
-        @Customized(sourceType = SonForm.class,targetType = SonDto.class,isList = true)
+        @Customized
         private List<SonForm> sonList;
     }
 
@@ -111,9 +125,7 @@ public class BeanUtils {
         private boolean flag;
         private double dou;
         private long l;
-        @Customized
         private SonDto son;
-        @Customized
         private List<SonDto> sonList;
     }
 
@@ -135,22 +147,6 @@ public class BeanUtils {
     @Retention(RetentionPolicy.RUNTIME)
     @Documented
     @interface Customized {
-
-        /**
-         * 源类型
-         */
-        Class<?> sourceType() default Object.class;
-
-        /**
-         * 目标类型
-         */
-        Class<?> targetType() default Object.class;
-
-        /**
-         * 自定义类型是但对象还是集合对象，默认单对象
-         */
-        boolean isList() default false;
-
     }
 
     // todo 就担心source的多，target的少
