@@ -32,6 +32,10 @@ public class BeanUtils {
         SonForm sonForm1 = new SonForm();
         sonForm1.setSonId(12);
         sonForm1.setSonName("方子璐");
+        GrandsonForm grandsonForm = new GrandsonForm();
+        grandsonForm.setGrandsonId(31);
+        grandsonForm.setGrandsonName("孙子名字");
+        sonForm.setGrandson(grandsonForm);
         form.setSonList(Stream.of(sonForm,sonForm1).collect(Collectors.toList()));
         form.setSon(sonForm);
         Dto dto = getDTO(form, new Dto());
@@ -118,6 +122,21 @@ public class BeanUtils {
     }
 
     @Data
+    static class SonForm{
+        private int sonId;
+        private String sonName;
+        private String notSame;
+        @Customized
+        private GrandsonForm grandson;
+    }
+
+    @Data
+    static class GrandsonForm{
+        private int grandsonId;
+        private String grandsonName;
+    }
+
+    @Data
     static class Dto{
         private int id;
         private String name;
@@ -130,25 +149,24 @@ public class BeanUtils {
     }
 
     @Data
-    static class SonForm{
-        private int sonId;
-        private String sonName;
-        private String notSame;
-    }
-
-    @Data
     static class SonDto{
         private int sonId;
         private String sonName;
         private String extra;
+        private GrandsonDto grandson;
     }
+
+    @Data
+    static class GrandsonDto{
+        private int grandsonId;
+        private String grandsonName;
+    }
+
 
     @Target({ElementType.FIELD})
     @Retention(RetentionPolicy.RUNTIME)
     @Documented
     @interface Customized {
     }
-
-    // todo 就担心source的多，target的少
 
 }
