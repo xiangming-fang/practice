@@ -146,6 +146,18 @@ public class BeanUtils {
         private long l;
         private SonDto son;
         private List<SonDto> sonList;
+
+        @Override
+        public String toString(){
+            return id + "\n" +
+                    name + "\n" +
+                    remain + "\n" +
+                    flag + "\n" +
+                    dou + "\n" +
+                    l + "\n" +
+                    son + "\n" +
+                    sonList + "\n";
+        }
     }
 
     @Data
