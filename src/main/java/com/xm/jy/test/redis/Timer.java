@@ -14,7 +14,7 @@ import java.util.Set;
  * @Description: 定时器
  * @Date: 2022/7/14 17:19
  */
-@Service
+//@Service
 public class Timer {
 
     public static final String DELAY_QUEUE = "delayQueue";

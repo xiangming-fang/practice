@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @auther 方翔鸣
  * @date 2020/3/4 20:14
  */
-@RestController
+//@RestController
 public class ReadYAMLConfigurationTest {
 
     @Value("${spring.datasource.url}")
