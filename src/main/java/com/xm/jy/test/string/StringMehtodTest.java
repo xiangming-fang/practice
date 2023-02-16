@@ -11,5 +11,7 @@ public class StringMehtodTest {
         for (String s1 : s.split(",")) {
             System.out.println(s1);
         }
+        String tmp = "1";
+        System.out.println(tmp.substring(1));
     }
 }
