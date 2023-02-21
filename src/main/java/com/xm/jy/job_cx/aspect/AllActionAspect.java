@@ -1,14 +1,5 @@
 package com.xm.jy.job_cx.aspect;
 
-import com.xm.jy.test.ioc.config.DayDayUpConfig;
-import com.xm.jy.test.ioc.config.GoodGoodStudyConfig;
-import org.aspectj.lang.annotation.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.annotation.Order;
-import org.springframework.stereotype.Component;
-
-import javax.annotation.Resource;
-
 /**
  * @author: albert.fang
  * @date: 2020/5/28 17:51

@@ -1,7 +1,7 @@
 package com.xm.jy.job_cx.controller;
 
-import com.xm.jy.test.ioc.config.DayDayUpConfig;
-import com.xm.jy.test.ioc.config.GoodGoodStudyConfig;
+import com.xm.jy.test.spring.ioc.config.DayDayUpConfig;
+import com.xm.jy.test.spring.ioc.config.GoodGoodStudyConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
