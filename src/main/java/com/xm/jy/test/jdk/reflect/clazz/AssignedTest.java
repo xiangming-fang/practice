@@ -11,5 +11,6 @@ public class AssignedTest {
         // 父.isAssignableFrom(子) true
         System.out.println(String.class.isAssignableFrom(Object.class));
         System.out.println(Object.class.isAssignableFrom(String.class));
+        System.out.println(Object.class.isAssignableFrom(Object.class));
     }
 }
