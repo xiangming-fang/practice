@@ -5,8 +5,8 @@
         function showButton() {
             var button = document.createElement("button");
             button.id = "down_ali_pics";
-            button.value = "download";
             button.textContent = "download";
+            button.style = "position:absolute;right:100px;bottom:100px;important:999";
             document.body.appendChild(button);
             document.getElementById("down_ali_pics").addEventListener("click", () => {
                 download();
@@ -66,7 +66,7 @@
                 })
                 .then(res => {
                     let blob = new Blob([res]) // 转为blob
-                    this.downloadFileName(blob, fileName) // 下载并重命名函数
+                    downloadFileName(blob, fileName) // 下载并重命名函数
                 })
         }
 
