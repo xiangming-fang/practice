@@ -39,9 +39,12 @@ public class SavePictures {
     public static void main(String[] args) throws IOException {
 
         // todo 这个路径也换一下咯
-        File htmlFile = new File("D:\\study\\practice\\src\\main\\resources\\taobao\\1.htm");
-//        Document parse = Jsoup.parse(htmlFile,"utf-8");
-        Document parse = Jsoup.parse(htmlFile,"gbk");
+        File htmlFile = new File("D:\\study\\practice\\src\\main\\resources\\taobao\\item.taobao.html");
+        Document parse = Jsoup.parse(htmlFile,"utf-8");
+
+
+//        File htmlFile = new File("D:\\study\\practice\\src\\main\\resources\\taobao\\1.htm");
+//        Document parse = Jsoup.parse(htmlFile,"gbk");
 
 //        HttpURLConnection inputStreamFromUrl = FileUtils.getInputStreamFromUrl("https://item.taobao.com/item.htm?spm=a1z10.3-c-s.0.0.6e10cfc7Fmcf3E&id=704061000469");
 //        InputStream is = inputStreamFromUrl.getInputStream();
