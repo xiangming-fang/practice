@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         淘宝宝贝详情图
 // @namespace    http://tampermonkey.net/
-// @version      1.2
+// @version      1.6
 // @description  下载淘宝宝贝详情页的5张主图和颜色图
 // @author       fxm
 // @license      https://www.apache.org/licenses/LICENSE-2.0
@@ -33,7 +33,6 @@
         var elementById = document.getElementById("J_Title");
         var title = elementById.getElementsByClassName("tb-main-title")[0].getAttribute("data-title");
         title = title.substring(0, 12);
-        console.log(title);
 
         // 主图
         var main_pics = document.getElementById("J_UlThumb");
@@ -63,12 +62,12 @@
         for (let i = 0; i < pending_download_pic_name_urls.length; i++) {
             var fileName = pending_download_pic_name_urls[i][0];
             var url = pending_download_pic_name_urls[i][1];
-            getBlob(url, fileName);
+            getBlob(url, title+"-"+fileName);
         }
 
     }
 
-// 第一步，要先通过当前url 取得 blob 对象（必须）
+    // 第一步，要先通过当前url 取得 blob 对象（必须）
     async function getBlob(url, fileName) {
         // fetch 为ES6新增，不支持IE兼容，请注意分辨
         await fetch(url)
@@ -77,7 +76,7 @@
             })
             .then(res => {
                 let blob = new Blob([res]) // 转为blob
-                this.downloadFileName(blob, fileName) // 下载并重命名函数
+                downloadFileName(blob, fileName) // 下载并重命名函数
             })
     }
 
