@@ -32,6 +32,8 @@
             var k = 0;
             for (let i = 0; i < lis.length; i++) {
                 var picUrl = lis[i].getElementsByTagName("img")[0].getAttribute("data-src");
+                // 直接忽略视频
+                if (picUrl == null || picUrl == '') continue;
                 var suffix = picUrl.split(".");
                 var name = (i+1) + "." + suffix[suffix.length - 1];
                 var download_url = protocol + picUrl.substring(0, picUrl.length - 10);
