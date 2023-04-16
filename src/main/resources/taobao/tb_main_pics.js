@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         淘宝宝贝详情图
 // @namespace    http://tampermonkey.net/
-// @version      1.6
+// @version      1.94
 // @description  下载淘宝宝贝详情页的5张主图和颜色图
 // @author       fxm
 // @license      https://www.apache.org/licenses/LICENSE-2.0
@@ -13,16 +13,7 @@
 // @grant        GM_deleteValue
 // ==/UserScript==
 (() => {
-    function showButton() {
-        var button = document.createElement("button");
-        button.id = "down_ali_pics";
-        button.textContent = "download";
-        button.style = "position:fixed;right:100px;bottom:100px;z-index:999999999";
-        document.body.appendChild(button);
-        document.getElementById("down_ali_pics").addEventListener("click", () => {
-            download();
-        })
-    }
+
 
     function download() {
 
@@ -36,7 +27,12 @@
 
         // 主图
         var main_pics = document.getElementById("J_UlThumb");
+        if (main_pics == null) {
+            console.log("此页没有主图")
+            return;
+        }
         var lis = main_pics.getElementsByTagName("li");
+        if (lis == null) return;
         // 待下载主图名称数组[name,url]
         var pending_download_pic_name_urls = [];
         var k = 0;
@@ -50,6 +46,10 @@
 
         // 颜色图
         var color_pics = document.getElementsByClassName("J_TSaleProp tb-img tb-clearfix")[0];
+        if (color_pics == null){
+            console.log("此页没有颜色图");
+            return;
+        }
         var color_lis = color_pics.getElementsByTagName("li");
         for (let i = 0; i < color_lis.length; i++) {
             var color_picUrl = color_lis[i].getElementsByTagName("a")[0].getAttribute("style");
@@ -62,7 +62,7 @@
         for (let i = 0; i < pending_download_pic_name_urls.length; i++) {
             var fileName = pending_download_pic_name_urls[i][0];
             var url = pending_download_pic_name_urls[i][1];
-            getBlob(url, title+"-"+fileName);
+            getBlob(url, title + "-" + fileName);
         }
 
     }
@@ -89,6 +89,17 @@
         document.body.removeChild(link)
     }
 
-    window.onload = showButton;
+    function downloadPage(){
+        if (window.parent.location.href.startsWith("https://item.taobao.com")){
+            // 等3秒的目的是为了加载好完整的宝贝详情页面，不知道为啥淘宝很卡，还是等等吧
+            setTimeout(download, 3000);
+            // 给它十秒钟下载时间，足够了吧？然后关掉页面
+            setTimeout(window.close,13000)
+        }
+    }
+
+    setTimeout(downloadPage,5000);
+
 })();
 
+document.getElementsByClassName("item3line1")

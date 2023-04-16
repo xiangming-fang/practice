@@ -17,12 +17,15 @@ public class Rename {
 
     public static void main(String[] args) throws Exception {
 
-        String path = "F:\\软考-系统架构设计师";
+//        String path = "F:\\软考-系统架构设计师";
+//        String path = "F:\\软考-系统架构设计师\\2022年系统架构设计师视频";
 //        String path = "F:\\1--【软考】系统架构设计师-考试介绍";
 
-        System.out.printf("重命名之前有 %d 个文件\n",count(new File(path)));
-        rename(path);
-        System.out.printf("重命名之后有 %d 个文件\n",count(new File(path)));
+//        System.out.printf("重命名之前有 %d 个文件\n",count(new File(path)));
+//        rename(path);
+//        System.out.printf("重命名之后有 %d 个文件\n",count(new File(path)));
+
+        renameByIdx();
     }
 
 
@@ -68,4 +71,14 @@ public class Rename {
             }
         }
     }
+
+
+    public static void renameByIdx(){
+        File tmpF = new File("C:\\Users\\fanga\\Desktop\\tmp-计算机组成与结构");
+        int idx = 0;
+        for (File file : tmpF.listFiles()) {
+            file.renameTo(new File(file.getParentFile().getAbsoluteFile() + "\\" + ++idx + ".jpg"));
+        }
+    }
+
 }

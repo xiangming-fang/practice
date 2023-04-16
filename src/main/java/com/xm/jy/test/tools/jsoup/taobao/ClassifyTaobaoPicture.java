@@ -15,7 +15,7 @@ public class ClassifyTaobaoPicture {
 
     private static String s_path = "D:\\downloads";
 
-    private static String t_path = "E:\\avif\\";
+    private static String t_path = "E:\\宝贝\\20230416\\";
 
     private static String delimiter = "-";
 
