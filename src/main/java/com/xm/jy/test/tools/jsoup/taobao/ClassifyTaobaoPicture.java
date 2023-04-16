@@ -22,7 +22,7 @@ public class ClassifyTaobaoPicture {
 
     private static String delimiter = "-";
 
-    public static void main1(String[] args) {
+    public static void main(String[] args) {
         File file = new File(s_path);
         File[] files = file.listFiles();
         if (files == null) return;
@@ -40,10 +40,6 @@ public class ClassifyTaobaoPicture {
                 ff.renameTo(new File(productName + "\\" + ff.getName().split(delimiter)[1]));
             }
         });
-    }
-
-    public static void main(String[] args) {
-
     }
 
 }
