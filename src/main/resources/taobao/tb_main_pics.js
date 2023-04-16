@@ -14,7 +14,6 @@
 // ==/UserScript==
 (() => {
 
-
     function download() {
 
         var protocol = "https:";
@@ -101,5 +100,3 @@
     setTimeout(downloadPage,5000);
 
 })();
-
-document.getElementsByClassName("item3line1")

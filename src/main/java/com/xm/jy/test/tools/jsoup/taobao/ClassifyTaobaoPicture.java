@@ -1,7 +1,9 @@
 package com.xm.jy.test.tools.jsoup.taobao;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -15,14 +17,17 @@ public class ClassifyTaobaoPicture {
 
     private static String s_path = "D:\\downloads";
 
-    private static String t_path = "E:\\宝贝\\20230416\\";
+    // 后面加一层日期的，自动生成
+    private static String t_path = "E:\\宝贝\\";
 
     private static String delimiter = "-";
 
-    public static void main(String[] args) {
+    public static void main1(String[] args) {
         File file = new File(s_path);
         File[] files = file.listFiles();
         if (files == null) return;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+        t_path = t_path + sdf.format(new Date()) + "\\";
         // key -> 产品名；value -> 对应的产品下图片
         Map<String, List<File>> map = Arrays.stream(files).collect(Collectors.groupingBy(v -> v.getName().split(delimiter)[0]));
         map.forEach((k,v) -> {
@@ -35,6 +40,10 @@ public class ClassifyTaobaoPicture {
                 ff.renameTo(new File(productName + "\\" + ff.getName().split(delimiter)[1]));
             }
         });
+    }
+
+    public static void main(String[] args) {
+
     }
 
 }
