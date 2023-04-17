@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         淘宝宝贝详情图
 // @namespace    http://tampermonkey.net/
-// @version      1.94
+// @version      1.97
 // @description  下载淘宝宝贝详情页的5张主图和颜色图
 // @author       fxm
 // @license      https://www.apache.org/licenses/LICENSE-2.0
@@ -22,7 +22,7 @@
         // 标题
         var elementById = document.getElementById("J_Title");
         var title = elementById.getElementsByClassName("tb-main-title")[0].getAttribute("data-title");
-        title = title.substring(0, 12);
+        title = title.substring(0, 15);
 
         // 主图
         var main_pics = document.getElementById("J_UlThumb");
@@ -37,6 +37,9 @@
         var k = 0;
         for (let i = 0; i < lis.length; i++) {
             var picUrl = lis[i].getElementsByTagName("img")[0].getAttribute("data-src");
+            if (picUrl == null) {
+                continue;
+            }
             var suffix = picUrl.split(".");
             var name = (i + 1) + "." + suffix[suffix.length - 1];
             var download_url = protocol + picUrl.substring(0, picUrl.length - 10);
