@@ -4,7 +4,10 @@ package com.xm.jy.test.jdk.string;
  * @auther 方翔鸣
  * @date 2020/3/7 15:01
  */
-public class StringMehtodTest {
+public abstract class StringMehtodTest {
+
+    public abstract void draw();
+
     public static void main(String[] args) {
         String s = "wo,jin,tian,zai,gan,ma";
         // split方法

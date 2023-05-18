@@ -1,15 +1,11 @@
 package com.xm.jy.test.jdk.reflect;
 
-import lombok.Data;
-
-import java.lang.annotation.*;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * @ProjectName: practice
@@ -21,31 +17,12 @@ import java.util.stream.Stream;
  */
 public class BeanUtils {
 
-    public static void main(String[] args) throws Exception {
-
-        Form form = new Form();
-        form.setId(1);
-        form.setName("方翔鸣");
-        SonForm sonForm = new SonForm();
-        sonForm.setSonId(11);
-        sonForm.setSonName("方子钰");
-        SonForm sonForm1 = new SonForm();
-        sonForm1.setSonId(12);
-        sonForm1.setSonName("方子璐");
-        GrandsonForm grandsonForm = new GrandsonForm();
-        grandsonForm.setGrandsonId(31);
-        grandsonForm.setGrandsonName("孙子名字");
-        sonForm.setGrandson(grandsonForm);
-        form.setSonList(Stream.of(sonForm,sonForm1).collect(Collectors.toList()));
-        form.setSon(sonForm);
-        Dto dto = getDTO(form, new Dto());
-        System.out.println(dto.toString());
-
-    }
-
     public static <S,T> T getDTO(S s, T t){
         Class<?> sClass = s.getClass();
-        Field[] declaredFields = sClass.getDeclaredFields();
+        List<Field> declaredFields = Arrays.stream(sClass.getDeclaredFields()).collect(Collectors.toList());
+        while ((sClass = sClass.getSuperclass()) != Object.class){
+            declaredFields.addAll(Arrays.stream(sClass.getDeclaredFields()).collect(Collectors.toList()));
+        }
         HashMap<String, Object> map = new HashMap<>(16);
         HashMap<String, Customized> customizedTypeMap = new HashMap<>(16);
         for (Field sField : declaredFields) {
@@ -61,7 +38,10 @@ public class BeanUtils {
             }
         }
         Class<?> tClass = t.getClass();
-        Field[] tClassDeclaredFields = tClass.getDeclaredFields();
+        List<Field> tClassDeclaredFields = Arrays.stream(tClass.getDeclaredFields()).collect(Collectors.toList());
+        while ((tClass = tClass.getSuperclass()) != Object.class){
+            tClassDeclaredFields.addAll(Arrays.stream(tClass.getDeclaredFields()).collect(Collectors.toList()));
+        }
         for (Field tField : tClassDeclaredFields) {
             tField.setAccessible(true);
             Object o = map.get(tField.getName());
@@ -109,76 +89,6 @@ public class BeanUtils {
             }
         }
         return t;
-    }
-
-    @Data
-    static class Form{
-        private int id;
-        private String name;
-        @Customized
-        private SonForm son;
-        @Customized
-        private List<SonForm> sonList;
-    }
-
-    @Data
-    static class SonForm{
-        private int sonId;
-        private String sonName;
-        private String notSame;
-        @Customized
-        private GrandsonForm grandson;
-    }
-
-    @Data
-    static class GrandsonForm{
-        private int grandsonId;
-        private String grandsonName;
-    }
-
-    @Data
-    static class Dto{
-        private int id;
-        private String name;
-        private int remain;
-        private boolean flag;
-        private double dou;
-        private long l;
-        private SonDto son;
-        private List<SonDto> sonList;
-
-        @Override
-        public String toString(){
-            return id + "\n" +
-                    name + "\n" +
-                    remain + "\n" +
-                    flag + "\n" +
-                    dou + "\n" +
-                    l + "\n" +
-                    son + "\n" +
-                    sonList + "\n";
-        }
-    }
-
-    @Data
-    static class SonDto{
-        private int sonId;
-        private String sonName;
-        private String extra;
-        private GrandsonDto grandson;
-    }
-
-    @Data
-    static class GrandsonDto{
-        private int grandsonId;
-        private String grandsonName;
-    }
-
-
-    @Target({ElementType.FIELD})
-    @Retention(RetentionPolicy.RUNTIME)
-    @Documented
-    @interface Customized {
     }
 
 }
