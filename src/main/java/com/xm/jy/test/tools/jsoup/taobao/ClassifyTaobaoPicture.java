@@ -25,6 +25,10 @@ public class ClassifyTaobaoPicture {
 
     private static final String oleana = "OLEANA";
 
+    private static final String oh = "欧货";
+
+    private static final String plat_form = "t-platform";
+
     private static final List<String> babys = new ArrayList<String>(){
         {
             add(zh);
@@ -53,6 +57,12 @@ public class ClassifyTaobaoPicture {
             }
             else if (k.contains(oleana)){
                 productName = productName + oleana + "\\" + k;
+            }
+            else if (k.contains(oh)){
+                productName = productName + oh + "\\" + k;
+            }
+            else if (k.contains(plat_form)){
+                productName = productName + plat_form + "\\" + k;
             }
             else {
                 System.err.println("宝贝名称不符合预期，需要额外处理");
