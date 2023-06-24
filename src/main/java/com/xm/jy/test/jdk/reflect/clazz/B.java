@@ -7,4 +7,5 @@ package com.xm.jy.test.jdk.reflect.clazz;
  */
 public abstract class B implements A{
     // 抽象类不是强制性必须实现接口中的抽象方法的
+    protected abstract void getB();
 }
