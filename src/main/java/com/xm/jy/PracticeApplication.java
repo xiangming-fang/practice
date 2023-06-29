@@ -8,7 +8,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
@@ -21,9 +20,8 @@ import java.util.Date;
  */
 @SpringBootApplication
 @EnableScheduling
-@MapperScan(basePackages = "com.xm.jy.job_cx.dao")
+@MapperScan(basePackages = {"com.xm.jy.job_cx.dao","com.xm.jy.xhz.mapper"})
 @EnableAsync
-@ComponentScan(basePackages = {"com.xm.jy"})
 public class PracticeApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
