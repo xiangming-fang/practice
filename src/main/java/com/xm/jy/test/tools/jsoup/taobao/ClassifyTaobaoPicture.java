@@ -1,6 +1,10 @@
 package com.xm.jy.test.tools.jsoup.taobao;
 
+import net.coobird.thumbnailator.Thumbnails;
+
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -25,13 +29,7 @@ public class ClassifyTaobaoPicture {
 
     private static final String oleana = "OLEANA";
 
-    private static final List<String> babys = new ArrayList<String>(){
-        {
-            add(zh);
-            add(tono);
-            add(oleana);
-        }
-    };
+    public static final String oh = "欧货";
 
     public static void main(String[] args) {
         File file = new File(s_path);
@@ -54,6 +52,9 @@ public class ClassifyTaobaoPicture {
             else if (k.contains(oleana)){
                 productName = productName + oleana + "\\" + k;
             }
+            else if (k.contains(oh)){
+                productName = productName + oh + "\\" + k;
+            }
             else {
                 System.err.println("宝贝名称不符合预期，需要额外处理");
                 return;
@@ -63,6 +64,11 @@ public class ClassifyTaobaoPicture {
                 parent.mkdirs();
             }
             for (File ff : v) {
+                try {
+                    Thumbnails.of(ff.getName()).imageType(BufferedImage.TYPE_INT_ARGB).scale(1f).outputQuality(0.8f).toFile(ff.getName());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 if (!ff.renameTo(new File(productName + "\\" + ff.getName().split(delimiter)[1]))) {
                     // 备选方案
                     Random random = new Random();
