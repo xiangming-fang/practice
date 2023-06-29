@@ -1,6 +1,10 @@
 package com.xm.jy.test.tools.jsoup.taobao;
 
+import net.coobird.thumbnailator.Thumbnails;
+
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;

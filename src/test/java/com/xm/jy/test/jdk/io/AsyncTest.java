@@ -1,10 +1,8 @@
 package com.xm.jy.test.jdk.io;
 
 import com.xm.jy.job_51.async.AsyncTask;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
 import java.time.Duration;
@@ -17,7 +15,6 @@ import java.util.concurrent.TimeUnit;
  * @description: 异步调用
  */
 @SpringBootTest
-@RunWith(SpringRunner.class)
 public class AsyncTest {
 
     @Resource
