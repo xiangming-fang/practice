@@ -18,7 +18,7 @@ public class SellerInfoServiceImpl implements SellerInfoSevice {
 
     @Override
     public Seller_Info getSellInfoById(String id) {
-        return repository.findOne(id);
+        return repository.findById(id).get();
     }
 
     @Override

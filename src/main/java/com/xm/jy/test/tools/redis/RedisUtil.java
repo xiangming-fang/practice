@@ -2,7 +2,7 @@ package com.xm.jy.test.tools.redis;
 
 import redis.clients.jedis.Jedis;
 
-import java.util.Set;
+import java.util.List;
 
 /**
  * @auther 方翔鸣
@@ -43,37 +43,10 @@ public class RedisUtil {
         JEDIS.set(key,value);
     }
 
-    public static void set(String key,String value,int expireSeconds){
-        set(key,value,NX,EX,expireSeconds);
-    }
-
-    public static void set(String key,String value,long expireMillsSeconds){
-        set(key,value,NX,PX,expireMillsSeconds);
-    }
-
-    public static void set(String key,String value,String nxxx,String expx,long time){
-        JEDIS.set(key,value,nxxx,expx,time);
-    }
-
     /************************** value类型 为 zset 部分 ********************************/
 
     public static Long zadd(String key,long score,String member){
         return JEDIS.zadd(key,score,member);
-    }
-
-    /**
-     * 在区间【最小，最大】里偏移 【offset】个值之后，取【count】个元素值
-     * @param key zset 的key
-     * @param min 最小分数
-     * @param max 最大分数
-     * @param offset 偏移量
-     * @param count 取几个
-     * @return java.util.Set<java.lang.String>
-     * @author Albert.fang
-     * @date 2022/7/14 16:18
-     */
-    public static Set<String> rangByScore(String key, double min, double max, int offset, int count){
-        return JEDIS.zrangeByScore(key, min, max, offset, count);
     }
 
     /**
@@ -85,7 +58,7 @@ public class RedisUtil {
      * @author Albert.fang
      * @date 2022/7/14 16:53
      */
-    public static Set<String> rangByScore(String key, double min, double max){
+    public static List<String> rangByScore(String key, double min, double max){
         return JEDIS.zrangeByScore(key, min, max);
     }
 

@@ -2,4 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xm.jy.xhz.mapper.SingleTableMapper">
 
+    <select id="selectByCusId" resultType="com.xm.jy.xhz.pojo.SingleTable" parameterType="long">
+        select * from single_table where id = #{id}
+    </select>
+
 </mapper>

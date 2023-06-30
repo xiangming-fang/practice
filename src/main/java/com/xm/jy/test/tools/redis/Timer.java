@@ -2,7 +2,7 @@ package com.xm.jy.test.tools.redis;
 
 import org.springframework.scheduling.annotation.Scheduled;
 
-import java.util.Set;
+import java.util.List;
 
 /**
  * @ProjectName: practice
@@ -21,7 +21,7 @@ public class Timer {
     public void consumer(){
         long l = System.currentTimeMillis() / 1000 * 1000;
         System.out.println(l);
-        Set<String> msgs = RedisUtil.rangByScore(DELAY_QUEUE, l, l + 59999);
+        List<String> msgs = RedisUtil.rangByScore(DELAY_QUEUE, l, l + 59999);
         // todo 消费
         System.out.println(msgs.toString());
         // 消费之后删除

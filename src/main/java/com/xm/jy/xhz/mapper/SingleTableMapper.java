@@ -1,7 +1,8 @@
 package com.xm.jy.xhz.mapper;
 
-import com.xm.jy.xhz.pojo.SingleTable;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.xm.jy.xhz.pojo.SingleTable;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * <p>
@@ -12,5 +13,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @since 2023-06-29
  */
 public interface SingleTableMapper extends BaseMapper<SingleTable> {
+
+    SingleTable selectByCusId(@Param("id") Long id);
 
 }

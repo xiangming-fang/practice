@@ -5,8 +5,8 @@ import org.springframework.util.CollectionUtils;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
-import java.util.Set;
 
 /**
  * @author: albert.fang
@@ -34,7 +34,7 @@ public class RedisTest {
         long first = System.currentTimeMillis();
         while (true){
             // 10s为一个range
-            Set<String> msgs = RedisUtil.rangByScore(DELAY_QUEUE, first, first + 10000);
+            List<String> msgs = RedisUtil.rangByScore(DELAY_QUEUE, first, first + 10000);
             if (CollectionUtils.isEmpty(msgs)){
                 Thread.sleep(10000);
                 first = first + 10000;
