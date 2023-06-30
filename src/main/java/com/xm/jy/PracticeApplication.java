@@ -2,12 +2,10 @@ package com.xm.jy;
 
 import com.xm.jy.test.spring.ioc.aware.ApplicationContextAwareTest;
 import com.xm.jy.test.spring.ioc.aware.DetectBeans;
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
@@ -20,9 +18,9 @@ import java.util.Date;
  */
 @SpringBootApplication
 @EnableScheduling
-@MapperScan(basePackages = {"com.xm.jy.job_cx.dao","com.xm.jy.xhz.mapper"})
 @EnableAsync
-public class PracticeApplication extends SpringBootServletInitializer {
+@ComponentScan(basePackages = {"com.xm.jy","com.baomidou"})
+public class PracticeApplication{
 
     public static void main(String[] args) {
         ApplicationContext ctx = SpringApplication.run(PracticeApplication.class, args);
@@ -45,11 +43,5 @@ public class PracticeApplication extends SpringBootServletInitializer {
         System.out.println("上下文的创建开始时间：" + new Date(ctx.getStartupDate()));
         System.out.println("上下文的parents：" + ctx.getParent());
         System.out.println("上下文的AutowireCapableBeanFactory：" + ctx.getAutowireCapableBeanFactory().toString());
-
-    }
-
-    @Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-        return builder.sources(PracticeApplication.class);
     }
 }

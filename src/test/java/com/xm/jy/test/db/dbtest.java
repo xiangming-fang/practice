@@ -2,10 +2,8 @@ package com.xm.jy.test.db;
 
 import com.xm.jy.xhz.mapper.SingleTableMapper;
 import com.xm.jy.xhz.pojo.SingleTable;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
 
@@ -14,7 +12,6 @@ import javax.annotation.Resource;
  * @Date: 2023/6/29 14:02
  */
 @SpringBootTest
-@RunWith(SpringRunner.class)
 public class dbtest {
 
     @Resource

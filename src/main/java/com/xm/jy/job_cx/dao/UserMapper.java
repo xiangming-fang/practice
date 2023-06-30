@@ -1,5 +1,6 @@
 package com.xm.jy.job_cx.dao;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.xm.jy.job_cx.model.User;
 import org.apache.ibatis.annotations.Param;
 
@@ -8,7 +9,7 @@ import org.apache.ibatis.annotations.Param;
  * @date: 2020/4/24 16:17
  * @description: User类dao层接口
  */
-public interface UserMapper {
+public interface UserMapper extends BaseMapper<User> {
 
     User getUserByNameAndPassword(@Param(value = "userName") String userName,
                                   @Param(value = "password") String password);
