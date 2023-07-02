@@ -33,13 +33,7 @@ public class ClassifyTaobaoPicture {
 
     private static final String plat_form = "t-platform";
 
-    private static final List<String> babys = new ArrayList<String>(){
-        {
-            add(zh);
-            add(tono);
-            add(oleana);
-        }
-    };
+    public static final String rx = "闰熙";
 
     public static void main(String[] args) {
         File file = new File(s_path);
@@ -67,6 +61,9 @@ public class ClassifyTaobaoPicture {
             }
             else if (k.contains(plat_form)){
                 productName = productName + plat_form + "\\" + k;
+            }
+            else if (k.contains(rx)){
+                productName = productName + rx + "\\" + k;
             }
             else {
                 System.err.println("宝贝名称不符合预期，需要额外处理");
