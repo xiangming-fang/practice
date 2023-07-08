@@ -1,4 +1,4 @@
-package com.xm.jy.test.tools.jsoup.taobao;
+package com.xm.jy.test.tools.taobao;
 
 import net.coobird.thumbnailator.Thumbnails;
 import org.apache.commons.lang3.StringUtils;

@@ -1,5 +1,6 @@
-package com.xm.jy.test.tools.jsoup.taobao;
+package com.xm.jy.test.tools.taobao;
 
+import com.xm.jy.test.tools.picture.HeicToJpg;
 import net.coobird.thumbnailator.Thumbnails;
 
 import java.awt.image.BufferedImage;
@@ -35,6 +36,10 @@ public class ClassifyTaobaoPicture {
 
     public static final String rx = "闰熙";
 
+    public static final String XXX = "XXX";
+
+    public static final String oz = "欧洲";
+
     public static void main(String[] args) {
         File file = new File(s_path);
         File[] files = file.listFiles();
@@ -65,6 +70,12 @@ public class ClassifyTaobaoPicture {
             else if (k.contains(rx)){
                 productName = productName + rx + "\\" + k;
             }
+            else if (k.contains(XXX)){
+                productName = productName + XXX + "\\" + k;
+            }
+            else if (k.contains(oz)){
+                productName = productName + oz + "\\" + k;
+            }
             else {
                 System.err.println("宝贝名称不符合预期，需要额外处理");
                 return;
@@ -74,11 +85,16 @@ public class ClassifyTaobaoPicture {
                 parent.mkdirs();
             }
             for (File ff : v) {
-                if (!ff.renameTo(new File(productName + "\\" + ff.getName().split(delimiter)[1]))) {
+                File toDest = new File(productName + "\\" + ff.getName().split(delimiter)[1]);
+                if (!ff.renameTo(toDest)) {
                     // 备选方案
                     Random random = new Random();
                     int i = random.nextInt(100) + 10;
-                    ff.renameTo(new File(productName + "\\" + i + ff.getName().split(delimiter)[1]));
+                    toDest = new File(productName + "\\" + i + ff.getName().split(delimiter)[1]);
+                    ff.renameTo(toDest);
+                    HeicToJpg.heicToJpg(toDest.getPath(),toDest.getPath());
+                }else {
+                    HeicToJpg.heicToJpg(toDest.getPath(),toDest.getPath());
                 }
             }
         });
