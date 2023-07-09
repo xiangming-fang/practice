@@ -17,7 +17,6 @@ public class HeicToJpg {
     private static final String IMAGE_MAGICK_PATH = "C:\\Program Files\\ImageMagick-7.1.1-Q16-HDRI";
 
     private static final ConvertCmd cmd = new ConvertCmd();
-    private static final IMOperation op = new IMOperation();
 
     static {
         cmd.setSearchPath(IMAGE_MAGICK_PATH);
@@ -47,6 +46,7 @@ public class HeicToJpg {
     // dest 目标图片文件地址
     public static void heicToJpg(String src,String dest){
 
+        IMOperation op = new IMOperation();
         op.addImage(src);
         op.addImage(dest);
 
