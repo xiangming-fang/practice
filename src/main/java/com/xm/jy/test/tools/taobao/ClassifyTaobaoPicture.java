@@ -40,6 +40,8 @@ public class ClassifyTaobaoPicture {
 
     public static final String oz = "欧洲";
 
+    public static final String korea = "韩国";
+
     public static void main(String[] args) {
         File file = new File(s_path);
         File[] files = file.listFiles();
@@ -75,6 +77,9 @@ public class ClassifyTaobaoPicture {
             }
             else if (k.contains(oz)){
                 productName = productName + oz + "\\" + k;
+            }
+            else if (k.contains(korea)){
+                productName = productName + korea + "\\" + k;
             }
             else {
                 System.err.println("宝贝名称不符合预期，需要额外处理");
