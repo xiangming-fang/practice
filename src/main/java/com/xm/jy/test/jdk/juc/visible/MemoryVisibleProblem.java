@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
  * @Date: 2023/11/8 16:18
  * 内存可见性问题复现：由于每个线程的工作内存和主内存数据不一致，没及时同步到主内存中
  */
-public class MemoryVisible {
+public class MemoryVisibleProblem {
 
     int a = 10;
     int b = 20;
@@ -24,7 +24,7 @@ public class MemoryVisible {
     @Test
     public void test(){
         while (true){
-            MemoryVisible mv = new MemoryVisible();
+            MemoryVisibleProblem mv = new MemoryVisibleProblem();
             new Thread(() -> {
                 try {
                     Thread.sleep(1);
