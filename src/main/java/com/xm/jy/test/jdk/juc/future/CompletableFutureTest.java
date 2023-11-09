@@ -13,6 +13,7 @@ import java.util.concurrent.TimeoutException;
  * @Date: 2023/11/9 16:48
  *
  * CompletableFuture 使用
+ * https://kaiwu.lagou.com/course/courseInfo.htm?courseId=16#/detail/pc?id=289
  */
 public class CompletableFutureTest {
 
