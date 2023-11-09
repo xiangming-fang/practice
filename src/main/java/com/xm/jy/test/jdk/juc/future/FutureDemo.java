@@ -5,6 +5,10 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.concurrent.*;
 
+/**
+ * @Author: xiangming.fang
+ * @Date: 2023/11/9 17:20
+ */
 public class FutureDemo {
 
     static class SlowTask implements Callable<String> {
