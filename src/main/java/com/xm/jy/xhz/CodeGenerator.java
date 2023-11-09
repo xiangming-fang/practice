@@ -3,11 +3,9 @@ package com.xm.jy.xhz;
 import com.baomidou.mybatisplus.generator.FastAutoGenerator;
 import com.baomidou.mybatisplus.generator.config.OutputFile;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
-import org.apache.ibatis.io.Resources;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Properties;
 
 /**
  * @Author: xiangming.fang
@@ -16,10 +14,9 @@ import java.util.Properties;
 public class CodeGenerator {
 
     public static void main(String[] args) throws IOException {
-        Properties properties = Resources.getResourceAsProperties("application.properties");
-        String url = properties.getProperty("spring.datasource.url");
-        String username = properties.getProperty("spring.datasource.username");
-        String password = properties.getProperty("spring.datasource.password");
+        String url = "jdbc:mysql://localhost/xiaohaizi?characterEncoding=utf-8&useSSL=false";
+        String username = "root";
+        String password = "123456";
 
         HashMap<OutputFile, String> map = new HashMap<>();
         map.put(OutputFile.mapperXml, "src/main/resources/mybatis/xiaohaizi");
@@ -43,7 +40,7 @@ public class CodeGenerator {
                     ;
                 })
                 .strategyConfig(builder -> {
-//                    builder.addInclude("single_table"); // 设置需要生成的表名
+                    builder.addInclude("single_table2"); // 设置需要生成的表名
 //                            .addTablePrefix("t_", "c_"); // 设置过滤表前缀
                 })
                 .templateEngine(new FreemarkerTemplateEngine()) // 使用Freemarker引擎模板，默认的是Velocity引擎模板

@@ -1,7 +1,7 @@
 package com.xm.jy.test.db;
 
-import com.xm.jy.xhz.mapper.SingleTableMapper;
-import com.xm.jy.xhz.pojo.SingleTable;
+import com.xm.jy.xhz.mapper.SingleTable2Mapper;
+import com.xm.jy.xhz.pojo.SingleTable2;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -14,13 +14,15 @@ import javax.annotation.Resource;
 @SpringBootTest
 public class dbtest {
 
+
     @Resource
-    private SingleTableMapper singleTableMapper;
+    private SingleTable2Mapper singleTable2Mapper;
+
 
     @Test
     public void insertTest(){
         for (int i = 0; i < 10000; i++) {
-            SingleTable singleTable = new SingleTable();
+            SingleTable2 singleTable = new SingleTable2();
             singleTable.setKey1(i+1 + "");
             singleTable.setKey2(i+1);
             singleTable.setKey3(i+1 + "");
@@ -28,7 +30,7 @@ public class dbtest {
             singleTable.setKeyPart2(i+1 + "");
             singleTable.setKeyPart3(i+1 + "");
             singleTable.setCommonField(i+1 + "");
-            singleTableMapper.insert(singleTable);
+            singleTable2Mapper.insert(singleTable);
         }
 
     }
